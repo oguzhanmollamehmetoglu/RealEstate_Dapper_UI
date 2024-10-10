@@ -1,2 +1,2 @@
-# RealEstate_Dapper_UI
+# RealEstate - Gayrimenkul Emlak
 Bu proje yapım aşamasındadır.
