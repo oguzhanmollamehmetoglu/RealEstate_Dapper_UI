@@ -1,0 +1,10 @@
+﻿@model CreateMailSubscribeDto
+
+<h4 class="mb-1">Email Bülteni</h4>
+<p>Son ilanlar için mail bültenine kayıt olun</p>
+<form asp-controller="MailSubscribe" asp-action="CreateMailSubscribe" class="subscribe-form mt-4" method="post">
+    <div class="form-group">
+        <input type="email" asp-for="Email" placeholder="Email adresinizi giriniz" required="">
+        <button class="btn btn-style btn-primary">AboneOl</button>
+    </div>
+</form>

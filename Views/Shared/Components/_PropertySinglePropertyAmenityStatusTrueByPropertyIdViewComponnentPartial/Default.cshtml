@@ -1,0 +1,18 @@
+﻿@model List<PropertyAmenityDto>
+
+<div class="single-bg-white">
+    <h3 class="post-content-title mb-4">Özellikler</h3>
+    <ul class="details-list">
+        @foreach (var item in Model)
+        {
+            <li><strong>@item.Title</strong></li>
+        }
+        
+       @*  <li><strong>Buil-In Wardrobes </strong> </li>
+        <li><strong>Dishwasher</strong> </li>
+        <li><strong>Floor Coverings </strong> </li>
+        <li><strong>Medical / Clinic </strong> </li>
+        <li><strong>Fencing</strong> </li>
+        <li><strong>Internet and wifi </strong> </li> *@
+    </ul>
+</div>

@@ -1,0 +1,8 @@
+﻿@model List<ResultAddressDto>
+
+<div class="map mt-5">
+    @foreach (var item in Model)
+    {
+        <iframe src="@item.Location" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    }
+</div>

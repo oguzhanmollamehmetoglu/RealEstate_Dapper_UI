@@ -1,0 +1,27 @@
+﻿@model List<ResultAddressDto>
+
+<div class="col-lg-4 cont-details">
+    <address>
+        @foreach (var item in Model)
+        {
+            <h5 class="">Office Addres</h5>
+            <p>
+                <span class="fa fa-map-marker"></span>@item.AddressFull
+            </p>
+            <h5 class="mt-4 pt-lg-3">Telefon Numarası</h5>
+            <p>
+                <span class="fa fa-mobile"></span> <strong>Tel :</strong>
+                <a href="tel:@item.Phone1">@item.Phone1</a>
+            </p>
+            <p>
+                <span class="fa fa-phone"></span> <strong>Tel :</strong>
+                <a href="tel:@item.Phone2">@item.Phone2</a>
+            </p>
+            <h5 class="mt-4 pt-lg-3">Email Address</h5>
+            <p>
+                <span class="fa fa-envelope"></span> <strong>Email :</strong>
+                <a href="mailto:@item.Email">@item.Email</a>
+            </p>
+        }
+    </address>
+</div>

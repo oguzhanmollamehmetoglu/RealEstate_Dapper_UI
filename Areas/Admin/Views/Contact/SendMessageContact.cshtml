@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "SendMessageContact";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Mesaj İçeriği</h6>
+                <form asp-action="SendMessageContact" method="post">
+                    <label>Konu</label>
+                    <input class="form-control" placeholder="@ViewBag.Subject" readonly />
+                    <br />
+                    <label>Mesajın İçeriği</label>
+                    <textarea style="height:100px;" class="form-control" readonly>@ViewBag.Message</textarea>
+                    <br />
+                    <label>Mesaja Cevap</label>
+                    <textarea style="height:100px;" class="form-control"></textarea>
+                    <br />
+                    <button class="btn btn-outline-primary">Cevapla</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

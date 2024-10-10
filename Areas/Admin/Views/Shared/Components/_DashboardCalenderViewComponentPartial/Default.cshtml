@@ -1,0 +1,73 @@
+﻿@using Newtonsoft.Json
+@model List<ResultToDoListDto>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Takvim</title>
+    <!-- Tempus Dominus (datetimepicker) CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
+    
+    <style>
+        .highlighted-day {
+            background-color: #c12d2d !important;
+            color: white !important;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-sm-12 col-md-6 col-xl-4">
+        <div class="h-100 bg-light rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Takvim</h6>
+                <a href="/Admin/Calender/Index/" type="button" class="btn btn-primary ms-2" style="font-size:12px;">Tümünü Gör</a>
+            </div>
+            <div id="calender"></div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Moment.js (Tarih ve saat manipülasyonu için) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!-- Moment.js Türkçe Desteği -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/tr.min.js"></script>
+    <!-- Tempus Dominus (datetimepicker) JS -->
+    <script src="https://cdn.jsdelivr.net/npm/tempusdominus-bootstrap-4@5.39.0/build/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // ViewBag'den tarihlerle dolu bir dizi oluştur
+            var datesToHighlight = @Html.Raw(JsonConvert.SerializeObject(ViewBag.DatesToHighlight));
+
+            $('#calender').datetimepicker({
+                inline: true,
+                format: 'L',
+                locale: 'tr'
+            });
+
+            function highlightDates() {
+                 // Önceki vurgulamaları temizle
+                $('#calender').find('.day').removeClass('highlighted-day');
+
+                $('#calender').find('.day').each(function () {
+                    var date = $(this).attr('data-day');
+                    var formattedDate = moment(date, 'DD.MM.YYYY').format('YYYY-MM-DD');
+
+                    if (datesToHighlight.includes(formattedDate)) {
+                        $(this).addClass('highlighted-day');
+                    }
+                });
+            }
+
+            // Takvimde sürekli olarak vurgulamaları güncelle
+            setInterval(highlightDates, 100); // Her 100 milisaniyede bir çalışır
+
+            // İlk kurulum ve olay bağlama
+            setupHighlighting();
+        });
+    </script>
+</body>
+</html>

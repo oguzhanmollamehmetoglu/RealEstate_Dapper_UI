@@ -1,0 +1,44 @@
+﻿@model CreatePropertyDetailDto
+@{
+    ViewData["Title"] = "CreatePropertyDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Yeni İlan Detayı ekleme sayfası</h6>
+                <form asp-action="CreatePropertyDetail" method="post">
+                    <label>Yatak Odası Sayısı</label>
+                    <input type="number" asp-for="BedRoomCount" class="form-control" />
+                    <br />
+                    <label>MetreKare</label>
+                    <input type="number" asp-for="PropertySize" class="form-control" />
+                    <br />
+                    <label>Oda Sayısı</label>
+                    <input type="number" asp-for="RoomCount" class="form-control" />
+                    <br />
+                    <label>Banyo Sayısı</label>
+                    <input type="number" asp-for="BathCount" class="form-control" />
+                    <br />
+                    <label>Garaj Sayısı</label>
+                    <input type="number" asp-for="GarageSize" class="form-control" />
+                    <br />
+                    <label>Bina Yılı</label>
+                    <input type="text" asp-for="BuildYear" class="form-control" />
+                    <br />
+                    <label>Lokasyon</label>
+                    <textarea type="text" asp-for="Location" class="form-control" rows="5"></textarea>
+                    <span>Bu alana iframe kodunuzdaki src içindeki linki yapıştırınız.</span>
+                    <br />
+                    <label>Vidyo Url</label>
+                    <textarea type="text" asp-for="VideoUrl" class="form-control" rows="5"></textarea>
+                    <spna>Bu alana youtube vidyo url linkini yapıştırınız.</spna>
+                    <br />
+                    <button class="btn btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

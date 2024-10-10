@@ -1,0 +1,43 @@
+﻿@model List<ResultPropertyAdvertListWithCategoryByAppUserDto>
+@{
+    ViewData["Title"] = "ApprovalAdverts";
+    Layout = "~/Areas/EstateAgent/Views/Shared/_EstateAgentLayout.cshtml";
+    int count = 0;
+}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Geçmiş İlan Listesi</h6>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">İlan Başlığı</th>
+                                <th scope="col">Kategori</th>
+                                <th scope="col">Fiyat</th>
+                                <th scope="col">Tür</th>
+                                <th scope="col">Sil</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@item.Title</td>
+                                    <td>@item.CategoryName</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Type</td>
+                                    <td><a href="/EstateAgent/MyAdverts/DeleteAdverts/@item.PropertyID" class="btn btn-outline-danger">Sil</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

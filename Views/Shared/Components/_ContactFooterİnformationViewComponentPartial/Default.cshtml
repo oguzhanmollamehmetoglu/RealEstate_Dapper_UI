@@ -1,0 +1,24 @@
+﻿@model List<ResultAddressDto>
+
+@foreach (var item in Model)
+{
+    <div class="column">
+        <a href="#url" class="link"><span class="fa fa-map"></span></a>
+        <a href="#url" class="title-small">Merkez Ofis</a>
+        <h4>@item.AddressFull</h4>
+        @*   <a href="#buytheme" class="btn btn-style btn-primary">
+    Schedule now
+    <span class="fa fa-long-arrow-right ml-2"></span>
+    </a> *@
+    </div>
+    <div class="column">
+        <a href="#url" class="link"><span class="fa fa-phone"></span></a>
+        <a href="#url" class="title-small">Bize Ulaşın</a>
+        <h4>Sorularınız için telefon numaramız</h4>
+        <a href="tel:@item.Phone1">
+            <p class="contact-phone mt-2">
+                <span class="lnr lnr-phone-handset"></span> @item.Phone1
+            </p>
+        </a>
+    </div>
+}

@@ -1,0 +1,79 @@
+﻿@model List<ResultDashboardLastPropertyDto>
+@{
+    int count = 0;
+}
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Son 5 Kiralık İlan</h6>
+            <a href="/Property/Index/">Tüm İlanlara Git</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col"># @* <input class="form-check-input" type="checkbox"> *@</th>
+                        <th scope="col">Tarih</th>
+                        <th scope="col">İlan Başlığı</th>
+                        <th scope="col">Şehir-İlçe</th>
+                        <th scope="col">Kategori</th>
+                        <th scope="col">Fiyat</th>
+                        <th scope="col">İlanı Gör</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count @* <input class="form-check-input" type="checkbox"> *@</td>
+                            <td>@(((DateTime)item.AdvertisementDate).ToString("dd-MMM-yyyy"))</td>
+                            <td>@item.Title</td>
+                            <td>@item.City - @item.District</td>
+                            <td>@item.CategoryName</td>
+                            <td>@item.Price ₺</td>
+                            <td><a class="btn btn-sm btn-primary" href="@Url.Action("PropertySingle","Property",new {slug = item.SlugUrl, id = item.PropertyID })">İlanı Gör</a></td>
+                        </tr>
+                    }
+
+                    @* <tr>
+                    <td><input class="form-check-input" type="checkbox"></td>
+                    <td>01 Jan 2045</td>
+                    <td>INV-0123</td>
+                    <td>Jhon Doe</td>
+                    <td>$123</td>
+                    <td>Paid</td>
+                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                    </tr>
+                    <tr>
+                    <td><input class="form-check-input" type="checkbox"></td>
+                    <td>01 Jan 2045</td>
+                    <td>INV-0123</td>
+                    <td>Jhon Doe</td>
+                    <td>$123</td>
+                    <td>Paid</td>
+                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                    </tr>
+                    <tr>
+                    <td><input class="form-check-input" type="checkbox"></td>
+                    <td>01 Jan 2045</td>
+                    <td>INV-0123</td>
+                    <td>Jhon Doe</td>
+                    <td>$123</td>
+                    <td>Paid</td>
+                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                    </tr>
+                    <tr>
+                    <td><input class="form-check-input" type="checkbox"></td>
+                    <td>01 Jan 2045</td>
+                    <td>INV-0123</td>
+                    <td>Jhon Doe</td>
+                    <td>$123</td>
+                    <td>Paid</td>
+                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                    </tr> *@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

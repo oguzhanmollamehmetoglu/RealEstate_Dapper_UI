@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+@await Component.InvokeAsync("_AdminHeaderViewComponentPartial")
+<body>
+    <div class="containerLayoutBuilder position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        @await Component.InvokeAsync("_AdminSpinnerViewComponentPartial")
+        <!-- Spinner End -->
+        <!-- Sidebar Start -->
+        @await Component.InvokeAsync("_AdminSideBarViewComponentPartial")
+        <!-- Sidebar End -->
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            @await Component.InvokeAsync("_AdminNavBarViewComponentPartial")
+            <!-- Navbar End -->
+            <!-- Blank Start -->
+            @RenderBody()
+            <!-- Blank End -->
+            <!-- Footer Start -->
+            @await Component.InvokeAsync("_AdminFooterViewComponentPartial")
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+    @await Component.InvokeAsync("_AdminScriptViewComponentPartial")
+</body>
+</html>

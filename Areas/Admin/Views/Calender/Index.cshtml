@@ -1,0 +1,66 @@
+﻿@using Newtonsoft.Json
+@model List<ResultToDoListDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- Tempus Dominus (datetimepicker) CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
+<style>
+    .highlighted-day {
+        background-color: #c12d2d !important;
+        color: white !important;
+        border-radius: 50%;
+    }
+</style>
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Takvim</h6>
+                <div id="calender"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Moment.js (Tarih ve saat manipülasyonu için) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<!-- Moment.js Türkçe Desteği -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/tr.min.js"></script>
+<!-- Tempus Dominus (datetimepicker) JS -->
+<script src="https://cdn.jsdelivr.net/npm/tempusdominus-bootstrap-4@5.39.0/build/js/tempusdominus-bootstrap-4.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        // ViewBag'den tarihlerle dolu bir dizi oluştur
+        var datesToHighlight = @Html.Raw(JsonConvert.SerializeObject(ViewBag.DatesToHighlight));
+
+        $('#calender').datetimepicker({
+            inline: true,
+            format: 'L',
+            locale: 'tr'
+        });
+
+        function highlightDates() {
+            // Önceki vurgulamaları temizle
+            $('#calender').find('.day').removeClass('highlighted-day');
+
+            $('#calender').find('.day').each(function () {
+                var date = $(this).attr('data-day');
+                var formattedDate = moment(date, 'DD.MM.YYYY').format('YYYY-MM-DD');
+
+                if (datesToHighlight.includes(formattedDate)) {
+                    $(this).addClass('highlighted-day');
+                }
+            });
+        }
+
+        // Takvimde sürekli olarak vurgulamaları güncelle
+        setInterval(highlightDates, 100); // Her 100 milisaniyede bir çalışır
+
+        // İlk kurulum ve olay bağlama
+        setupHighlighting();
+    });
+</script>

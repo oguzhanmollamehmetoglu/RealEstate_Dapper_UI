@@ -1,0 +1,19 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+@await Component.InvokeAsync("_HeaderViewComponentPartial")
+<body>
+    <!--header-->
+    @await Component.InvokeAsync("_NavbarViewComponentPartial")
+    <!-- body -->
+    @RenderBody()
+    <!-- footers -->
+    @await Component.InvokeAsync("_FooterViewComponentPartial")
+    <!-- jQuery and Bootstrap JS -->
+    @await Component.InvokeAsync("_ScriptViewComponentPartial")
+</body>
+</html>
+@await RenderSectionAsync("Scripts", required: false)

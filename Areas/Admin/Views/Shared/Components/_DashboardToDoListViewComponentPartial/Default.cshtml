@@ -1,0 +1,70 @@
+﻿@model List<ResultToDoListDto>
+<div class="col-sm-12 col-md-6 col-xl-4">
+    <div class="h-100 bg-light rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <h6 class="mb-0">Yapılıcaklar Listesi</h6>
+            <div style="display: flex;">
+                <a href="/Admin/ToDoList/Index/" class="btn btn-primary" style="display:flex; font-size:12px;" type="button">Tümünü Gör</a>
+                <a href="/Admin/ToDoList/CreateToDoList/" type="button" class="btn btn-primary ms-2" style="font-size:12px;">Ekle</a>
+            </div>
+        </div>
+        @foreach (var item in Model)
+        {
+            @if (item.ToDoListStatus == true)
+            {
+                <div class="d-flex align-items-center border-bottom py-2">
+                    <a href="/Admin/ToDoList/ToDoListStatusChangeToFalse/@item.ToDoListID" class="form-check-input m-0" role="checkbox" aria-checked="false">
+                        <input type="checkbox" class="form-check-input m-0" style="display:none;">
+                    </a>
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <span>@item.Description...</span>
+                            <a href="/Admin/ToDoList/DeleteToDoList/@item.ToDoListID" class="btn btn-sm"><i class="fa fa-times"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="d-flex align-items-center border-bottom py-2">
+                    <a href="/Admin/ToDoList/ToDoListStatusChangeToTrue/@item.ToDoListID" style="background-color: #009cff;" class="form-check-input m-0" role="checkbox" aria-checked="true">
+                        <p style="text-align: center; align-items: center; display: flex; justify-content: center; color: white; font-size: small;">✓</p>
+                    </a>
+                    <div class="w-100 ms-3">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <span><del>@item.Description....</del></span>
+                            <a href="/Admin/ToDoList/DeleteToDoList/@item.ToDoListID" class="btn btn-sm text-primary"><i class="fa fa-times"></i></a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        @*         <div class="d-flex align-items-center border-bottom py-2">
+        <input class="form-check-input m-0" type="checkbox">
+        <div class="w-100 ms-3">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+        <span>Short task goes here...</span>
+        <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+        </div>
+        </div>
+        </div>
+        <div class="d-flex align-items-center border-bottom py-2">
+        <input class="form-check-input m-0" type="checkbox">
+        <div class="w-100 ms-3">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+        <span>Short task goes here...</span>
+        <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+        </div>
+        </div>
+        </div>
+        <div class="d-flex align-items-center pt-2">
+        <input class="form-check-input m-0" type="checkbox">
+        <div class="w-100 ms-3">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+        <span>Short task goes here...</span>
+        <button class="btn btn-sm"><i class="fa fa-times"></i></button>
+        </div>
+        </div>
+        </div> *@
+    </div>
+</div>

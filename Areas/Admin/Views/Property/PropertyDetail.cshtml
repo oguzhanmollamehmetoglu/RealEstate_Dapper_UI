@@ -1,0 +1,46 @@
+﻿@model ResultPropertyDetailDto
+@{
+    ViewData["Title"] = "PropertyDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">İlan Detayları Listesi</h6>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Yatak Oda Sayısı</th>
+                                <th scope="col">MetreKare</th>
+                                <th scope="col">Oda Sayısı</th>
+                                <th scope="col">Banyo Sayısı</th>
+                                <th scope="col">Garaj Sayısı</th>
+                                <th scope="col">Bina Yılı</th>
+                                <th scope="col">Lokasyon</th>
+                                <th scope="col">VideoUrl</th>
+                                <th scope="col">Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">@Model.PropertyDetailsID</th>
+                                <td>@Model.BedRoomCount</td>
+                                <td>@Model.PropertySize</td>
+                                <td>@Model.RoomCount</td>
+                                <td>@Model.BathCount</td>
+                                <td>@Model.GarageSize</td>
+                                <td>@Model.BuildYear</td>
+                                <td>@Model.Location</td>
+                                <td>@Model.VideoUrl</td>
+                                <td><a href="/Admin/Property/UpdatePropertyDetail/@Model.PropertyDetailsID" class="btn btn-outline-success">Güncelle</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

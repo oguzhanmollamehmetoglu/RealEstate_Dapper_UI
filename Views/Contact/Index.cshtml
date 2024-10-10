@@ -1,0 +1,72 @@
+﻿@model CreateContactDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<!--/header-->
+<section class="w3l-about-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about pt-5">
+        <div class="container pt-lg-5 py-3">
+        </div>
+    </div>
+</section>
+<section class="w3l-breadcrumb">
+    <div class="container">
+        <ul class="breadcrumbs-custom-path">
+            <li><a href="/Default/Index/">Anasayfa</a></li>
+            <li class="active"><span class="fa fa-angle-right mx-2" aria-hidden="true"></span> Bize Ulaşın</li>
+        </ul>
+    </div>
+</section>
+<!-- contacts -->
+<section class="w3l-contact-7 pt-5" id="contact">
+    <div class="contacts-9 pt-lg-5 pt-md-4">
+        <div class="container">
+            <div class="top-map">
+                <div class="row map-content-9">
+                    <div class="col-lg-8">
+                        <div class="contact-form">
+                            <h5 class="mb-2">Bize Ulaşın</h5>
+                            <p class="mb-4">Bizemle iletişime geçmeniz iki tık uzağınızda.</p>
+                            @if (TempData["SuccessMessage"] != null)
+                            {
+                                <div class="alert alert-success">
+                                    @TempData["SuccessMessage"]
+                                </div>
+                            }
+
+                            @if (TempData["ErrorMessage"] != null)
+                            {
+                                <div class="alert alert-danger">
+                                    @TempData["ErrorMessage"]
+                                </div>
+                            }
+                            <form asp-action="Index" method="post">
+                                <div class="form-grid">
+                                    <div class="input-field">
+                                        <input type="text" asp-for="Name" id="w3lName" placeholder="Adınız-Soyadınız" required="">
+                                    </div>
+                                    <div class="input-field">
+                                        <input type="email" asp-for="Email" id="w3lSender" placeholder="Email" required="">
+                                    </div>
+                                </div>
+                                <div class="input-field mt-4">
+                                    <div class="input-field">
+                                        <input type="text" asp-for="Subject" id="w3lName" placeholder="Konu" required="">
+                                    </div>
+                                    <br />
+                                    <textarea id="w3lMessage" asp-for="Message" placeholder="Mesajınız"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-style mt-3">Gönder</button>
+                            </form>
+                        </div>
+                    </div>
+                    @await Component.InvokeAsync("_ContactİnformationViewComponentPartial")
+                </div>
+            </div>
+        </div>
+        @await Component.InvokeAsync("_ContactİnformationLocationViewComponentPartial")
+    </div>
+</section>
+<!-- //contacts -->

@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+    var model2Dict = ViewBag.Model2Dict as Dictionary<int, ResultPropertyDetailDto>;
+    var errorMessage = ViewBag.ErrorMessage as string;
+}
+
+<div class="container-fluid pt-4 px-4">
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">
+            @errorMessage
+        </div>
+    }
+
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">İlan Listesi</h6>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">İlan Başlığı</th>
+                                <th scope="col">Şehir</th>
+                                <th scope="col">İlçe</th>
+                                <th scope="col">Kategori</th>
+                                <th scope="col">Fiyat</th>
+                                <th scope="col">Tür</th>
+                                <th scope="col">Sil</th>
+                                <th scope="col">Güncelle</th>
+                                <th scope="col">Sitede Gör</th>
+                                <th scope="col">Durum</th>
+                                <th scope="col">Günün Fırsatı</th>
+                                <th scope="col">Detaylar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Model1)
+                            {
+                                count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@item.Title</td>
+                                    <td>@item.City</td>
+                                    <td>@item.District</td>
+                                    <td>@item.CategoryName</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Type</td>
+                                    <td><a href="/Admin/Property/DeleteProperty/@item.PropertyID" class="btn btn-outline-danger">Sil</a></td>
+                                    <td><a href="/Admin/Property/UpdateProperty/@item.PropertyID" class="btn btn-outline-success">Güncelle</a></td>
+                                    <td>
+                                        @if (item.PropertyStatus == true)
+                                        {
+                                            <a href="@Url.Action("PropertySingle", "Property", new { slug = item.SlugUrl, id = item.PropertyID })" class="btn btn-outline-primary">Sitede Gör</a>
+                                        }
+                                        else
+                                        {
+                                            <p>Yayında Değil</p>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.PropertyStatus == true)
+                                        {
+                                            <a href="/Admin/Property/PropertyStatusChangeToFalse/@item.PropertyID" class="btn btn-outline-danger">Pasif Yap</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Admin/Property/PropertyStatusChangeToTrue/@item.PropertyID" class="btn btn-outline-dark">Aktif Yap</a>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.DealOfTheDay == true)
+                                        {
+                                            <a href="/Admin/Property/PropertyDealOfTheDayStatusChangeToFalse/@item.PropertyID" class="btn btn-outline-danger">Pasif Yap</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Admin/Property/PropertyDealOfTheDayStatusChangeToTrue/@item.PropertyID" class="btn btn-outline-dark">Aktif Yap</a>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (model2Dict.ContainsKey(item.PropertyID))
+                                        {
+                                            <a href="/Admin/Property/PropertyDetail/@item.PropertyID" class="btn btn-outline-primary">Detaylar</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Admin/Property/CreatePropertyDetail/@item.PropertyID" class="btn btn-outline-info">Detay Ekle</a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a href="/Admin/Property/CreateProperty/" class="btn btn-outline-info">Yeni İlan Girişi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

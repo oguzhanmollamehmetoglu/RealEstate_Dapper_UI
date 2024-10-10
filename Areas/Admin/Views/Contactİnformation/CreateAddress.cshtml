@@ -1,0 +1,36 @@
+﻿@model CreateAddressDto
+@{
+    ViewData["Title"] = "CreateAddress";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Yeni İletişim Bilgileri Ekleme Sayfası</h6>
+                <form method="post">
+                    <label>Address</label>
+                    <textarea type="text" asp-for="AddressFull" class="form-control" rows="5"></textarea>
+                    <br />
+                    <label>Tel 1</label>
+                    <input type="tel" asp-for="Phone1" class="form-control" />
+                    <span>Bu alanda + ifadesi ile telefon numarasını yazınız!!!</span>
+                    <br />
+                    <label>Tel 2</label>
+                    <input type="tel" asp-for="Phone2" class="form-control" />
+                    <span>Bu alanda + ifadesi ile telefon numarasını yazınız!!!</span>
+                    <br />
+                    <label>Mail Adresi</label>
+                    <input type="email" asp-for="Email" class="form-control" />
+                    <br />
+                    <label>Lokasyon</label>
+                    <input type="text" asp-for="Location" class="form-control" />
+                    <span>Bu alana iframe kodunuzda bulunan src linkini yapıştırınız!!!</span>
+                    <br />
+                    <button class="btn btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

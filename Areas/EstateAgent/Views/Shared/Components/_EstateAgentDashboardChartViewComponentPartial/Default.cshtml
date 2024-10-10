@@ -1,0 +1,56 @@
+﻿@model List<ResultEstateAgentDashboardChartDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px; /* Added for spacing */
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <canvas id="myChart" style="max-width: 500px"></canvas>
+        <canvas id="myChart" style="max-width: 500px"></canvas>
+    </div>
+    @{
+        var city = new List<string>();
+        var cityCount = new List<int>();
+
+        foreach (var item in Model)
+        {
+            city.Add(item.City);
+            cityCount.Add(item.CityCount);
+        }
+        <script>
+            // Convert server-side data to JSON
+            const xValuesChart1 = @Html.Raw(Json.Serialize(city));
+            const yValuesChart1 = @Html.Raw(Json.Serialize(cityCount));
+            const barColorsChart1 = ["rgb(106, 212, 221)", "rgb(127, 199, 217)", "rgb(54, 84, 134)", "rgb(134, 182, 246)", "rgb(0, 141, 218)"];
+
+            // Create the chart
+            new Chart("myChart", {
+                type: "bar",
+                data: {
+                    labels: xValuesChart1, // Use xValuesChart1 here
+                    datasets: [{
+                        backgroundColor: barColorsChart1,
+                        data: yValuesChart1
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "Şehir - İlan İstatistiği"
+                    }
+                }
+            });
+        </script>
+    }
+</body>
+</html>

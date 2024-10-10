@@ -1,0 +1,50 @@
+﻿@model CreatePropertyDtos
+@{
+    ViewData["Title"] = "CreateAdverts";
+    Layout = "~/Areas/EstateAgent/Views/Shared/_EstateAgentLayout.cshtml";
+}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Yeni İlan ekleme sayfası</h6>
+                <form asp-action="CreateAdverts" method="post">
+                    <label>İlan Başlığı</label>
+                    <input type="text" asp-for="Title" class="form-control" />
+                    <br />
+                    <label>İlan Seo Uyumlu Başlık</label>
+                    <input type="text" asp-for="SlugUrl" class="form-control" />
+                    <span>Bu alana başlık ta yazdığınız değeri ingilizce karakterler in desteklediği ve arasında boşluk olmayacak şekilde "-" boşluk yerine kullanılabilir bütün harfleri küçük olmalı!!!!!!</span>
+                    <br />
+                    <label>Şehir</label>
+                    <input type="text" asp-for="City" class="form-control" />
+                    <br />
+                    <label>İlçe</label>
+                    <input type="text" asp-for="District" class="form-control" />
+                    <br />
+                    <label>Kategori</label>
+                    <select asp-for="PropertyCategory" asp-items="@(new SelectList(ViewData["PropertyCategory"] as List<SelectListItem>, "Value", "Text"))" class="form-control">
+                        <option value="">Kategori Seçiniz</option>
+                    </select>
+                    <br />
+                    <label>Fiyat</label>
+                    <input type="text" asp-for="Price" class="form-control" />
+                    <br />
+                    <label>Tür</label>
+                    <input type="text" asp-for="Type" class="form-control" />
+                    <br />
+                    <label>Kapak Fotoğrafı</label>
+                    <input type="text" asp-for="Coverİmage" class="form-control" />
+                    <br />
+                    <label>İlan Açık Addresi</label>
+                    <textarea type="text" asp-for="Address" class="form-control" rows="5"></textarea>
+                    <br />
+                    <label>İlan Açıklaması</label>
+                    <textarea type="text" asp-for="Description" class="form-control" rows="5"></textarea>
+                    <br />
+                    <button class="btn btn-primary">İlan Oluştur</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
