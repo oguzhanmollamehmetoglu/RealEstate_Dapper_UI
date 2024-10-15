@@ -1,0 +1,47 @@
+﻿@model List<ResultDashboardLastPropertyDto>
+
+@*Buradan devam edilicek düzenlenmeye*@
+<div class="sidebar-widget popular-posts">
+    <div class="sidebar-title">
+        <h4>Emlakçıya Ait Diğer İlanlar</h4>
+    </div>
+    @foreach (var item in Model)
+    {
+        <article class="post">
+            <figure class="post-thumb">
+                <img src="#" class="radius-image" alt="">
+            </figure>
+            <div class="text">
+                <a href="#blog-single">
+                    @item.Title
+                </a>
+                <div class="post-info">@item.AdvertisementDate - @item.Price</div>
+            </div>
+        </article>
+    }
+
+  @*   <article class="post">
+        <figure class="post-thumb">
+            <img src="~/starter/assets/images/l2.jpg" class="radius-image" alt="">
+        </figure>
+        <div class="text">
+            <a href="#blog-single">
+                Build your next landing page.
+            </a>
+            <div class="post-info">Sep 09, 2020 - 2 comments</div>
+        </div>
+    </article>
+
+    <article class="post">
+        <figure class="post-thumb">
+            <img src="~/starter/assets/images/l3.jpg" class="radius-image" alt="">
+        </figure>
+        <div class="text">
+            <a href="#blog-single">
+                Simply the best. Better than the rest.
+            </a>
+            <div class="post-info">Sep 10, 2020 - 2 comments</div>
+        </div>
+    </article> *@
+
+</div>
