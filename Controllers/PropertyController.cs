@@ -67,6 +67,7 @@ namespace RealEstate_Dapper_UI.Controllers
             var values2 = JsonConvert.DeserializeObject<GetPropertyDetailDto>(jsonData2);
 
             ViewBag.PropertyID = values.PropertyID;
+            ViewBag.i2 = values.AppUserID;
             ViewBag.Title1 = values.Title.ToString();
             ViewBag.Price = values.Price;
             ViewBag.Address = values.Address;

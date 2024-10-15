@@ -8,14 +8,14 @@
     @foreach (var item in Model)
     {
         <article class="post">
-            <figure class="post-thumb">
-                <img src="#" class="radius-image" alt="">
+            <figure class="post-thumb" style="align-content: center;">
+                <img src="~/@item.Coverİmage" class="radius-image" alt="" style="height: 60%;">
             </figure>
             <div class="text">
-                <a href="#blog-single">
+                <a href="@Url.Action("PropertySingle","Property",new {slug = item.SlugUrl, id = item.PropertyID })">
                     @item.Title
                 </a>
-                <div class="post-info">@item.AdvertisementDate - @item.Price</div>
+                <div class="post-info">@item.AdvertisementDate.ToString("dd-MMM-yyyy") - @item.Price</div>
             </div>
         </article>
     }

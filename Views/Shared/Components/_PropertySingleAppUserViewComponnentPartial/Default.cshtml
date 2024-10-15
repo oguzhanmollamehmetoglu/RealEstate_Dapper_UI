@@ -23,6 +23,6 @@
             <button type="submit" class="btn btn-primary btn-style w-100">Detaylı İletişim Bilgileri</button>
         </div>
         <!-- Popular Post Widget-->
-        @await Component.InvokeAsync("_PropertySingleFiveListViewComponnentPartial")
+        @await Component.InvokeAsync("_PropertySingleFiveListViewComponnentPartial", new { id = ViewBag.id })
     </aside>
 </div>

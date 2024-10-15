@@ -17,11 +17,12 @@ namespace RealEstate_Dapper_UI.ViewComponents.PropertySingle
             _apiSettings = apiSettings.Value;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int i2)
         {
+            ViewBag.id = i2;
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_apiSettings.BaseUrl);
-            var responseMessage = await client.GetAsync("AppUser?id=1");
+            var responseMessage = await client.GetAsync("AppUser?id=" + i2);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
