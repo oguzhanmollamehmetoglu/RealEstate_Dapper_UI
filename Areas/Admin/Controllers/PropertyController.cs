@@ -150,12 +150,20 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateProperty(UpdatePropertyDtos updatePropertyDtos)
         {
+            //Burada kaldın devam edilicek
+
+            //var client2 = _httpClientFactory.CreateClient();
+            //client2.BaseAddress = new Uri(_apiSettings.BaseUrl);
+            //var responseMessage2 = await client2.GetAsync("Property/PropertyListWithCategory");
+            //var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+            //var values2 = JsonConvert.DeserializeObject<List<ResultPropertyDtos>>(jsonData2);
+
             updatePropertyDtos.DealOfTheDay = false;
             updatePropertyDtos.AdvertisementDate = DateTime.Now;
-            updatePropertyDtos.PropertyStatus = true;
+            updatePropertyDtos.PropertyStatus = false;
 
-            var id = _loginService.GetUserId;
-            updatePropertyDtos.AppUserID = int.Parse(id);
+            //var id = _loginService.GetUserId;
+            //updatePropertyDtos.AppUserID = int.Parse(id);
 
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_apiSettings.BaseUrl);
