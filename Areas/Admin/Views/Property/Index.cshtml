@@ -3,6 +3,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     int count = 0;
     var model2Dict = ViewBag.Model2Dict as Dictionary<int, ResultPropertyDetailDto>;
+    var model3Dict = ViewBag.Model3Dict as Dictionary<int, GetPropertyImageByPropertyIdDto>;
     var errorMessage = ViewBag.ErrorMessage as string;
 }
 
@@ -35,6 +36,7 @@
                                 <th scope="col">Durum</th>
                                 <th scope="col">Günün Fırsatı</th>
                                 <th scope="col">Detaylar</th>
+                                <th scope="col">Resimler</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,6 +91,16 @@
                                         else
                                         {
                                             <a href="/Admin/Property/CreatePropertyDetail/@item.PropertyID" class="btn btn-outline-info">Detay Ekle</a>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (model3Dict.ContainsKey(item.PropertyID))
+                                        {
+                                            <a href="/Admin/Property/PropertyImage/@item.PropertyID" class="btn btn-outline-primary">Resimler</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Admin/Property/CreatePropertyImage/@item.PropertyID" class="btn btn-outline-info">Resim Ekle</a>
                                         }
                                     </td>
                                 </tr>

@@ -8,6 +8,7 @@ using RealEstate_Dapper_UI.Models;
 using Microsoft.Extensions.Options;
 using System.Text;
 using RealEstate_Dapper_UI.Services;
+using DataTransferObjectLayer.Dtos.PropertyImageDtos;
 
 namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
 {
@@ -25,6 +26,7 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
             _apiSettings = apiSettings.Value;
         }
 
+        //Property Controler//
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
@@ -32,8 +34,9 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
 
             var responseMessage = await client.GetAsync("Property/PropertyListWithCategory");
             var responseMessage2 = await client.GetAsync("PropertyDetail");
+            var responseMessage3 = await client.GetAsync("PropertyImage");
 
-            if (responseMessage.IsSuccessStatusCode && responseMessage2.IsSuccessStatusCode)
+            if (responseMessage.IsSuccessStatusCode && responseMessage2.IsSuccessStatusCode && responseMessage3.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultPropertyDtos>>(jsonData);
@@ -43,9 +46,17 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
                 var values2 = JsonConvert.DeserializeObject<List<ResultPropertyDetailDto>>(jsonData2);
                 ViewBag.Model2 = values2;
 
+                var jsonData3 = await responseMessage3.Content.ReadAsStringAsync();
+                var values3 = JsonConvert.DeserializeObject<List<GetPropertyImageByPropertyIdDto>>(jsonData3);
+                ViewBag.Model3 = values3;
+
                 // Convert ViewBag.Model2 to a dictionary for faster lookups
                 var model2Dict = values2.ToDictionary(v => v.PropertyID);
                 ViewBag.Model2Dict = model2Dict;
+
+                // Convert ViewBag.Model3 to a dictionary for faster lookups
+                var model3Dict = values3.ToDictionary(z => z.PropertyID);
+                ViewBag.Model3Dict = model3Dict;
 
                 return View();
             }
@@ -93,6 +104,7 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
             }
             return View();
         }
+
         public async Task<IActionResult> DeleteProperty(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -148,22 +160,20 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateProperty(UpdatePropertyDtos updatePropertyDtos)
+        public async Task<IActionResult> UpdateProperty(UpdatePropertyDtos updatePropertyDtos, int id)
         {
-            //Burada kaldın devam edilicek
-
-            //var client2 = _httpClientFactory.CreateClient();
-            //client2.BaseAddress = new Uri(_apiSettings.BaseUrl);
-            //var responseMessage2 = await client2.GetAsync("Property/PropertyListWithCategory");
-            //var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
-            //var values2 = JsonConvert.DeserializeObject<List<ResultPropertyDtos>>(jsonData2);
-
+            var client2 = _httpClientFactory.CreateClient();
+            client2.BaseAddress = new Uri(_apiSettings.BaseUrl);
+            var responseMessage2 = await client2.GetAsync($"Property/{id}");
+            var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+            var values2 = JsonConvert.DeserializeObject<UpdatePropertyDtos>(jsonData2);
+            
             updatePropertyDtos.DealOfTheDay = false;
             updatePropertyDtos.AdvertisementDate = DateTime.Now;
             updatePropertyDtos.PropertyStatus = false;
 
-            //var id = _loginService.GetUserId;
-            //updatePropertyDtos.AppUserID = int.Parse(id);
+            var ıd = values2.AppUserID;
+            updatePropertyDtos.AppUserID = ıd;
 
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_apiSettings.BaseUrl);
@@ -176,6 +186,7 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
             }
             return View();
         }
+
         public async Task<IActionResult> PropertyDealOfTheDayStatusChangeToFalse(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -187,6 +198,7 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
             }
             return View();
         }
+
         public async Task<IActionResult> PropertyDealOfTheDayStatusChangeToTrue(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -198,6 +210,7 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
             }
             return View();
         }
+
         public async Task<IActionResult> PropertyStatusChangeToFalse(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -209,6 +222,7 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
             }
             return View();
         }
+
         public async Task<IActionResult> PropertyStatusChangeToTrue(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -306,6 +320,21 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "Property", new { area = "Admin" });
+            }
+            return View();
+        }
+
+        //PropertyImage Controler//
+        public async Task<IActionResult> PropertyImage(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_apiSettings.BaseUrl);
+            var responseMessage = await client.GetAsync("PropertyImage/GetPropertyImageByPropertyId?id=" + id);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<GetPropertyImageByPropertyIdDto>>(jsonData);
+                return View(values);
             }
             return View();
         }
