@@ -93,16 +93,20 @@
                                             <a href="/Admin/Property/CreatePropertyDetail/@item.PropertyID" class="btn btn-outline-info">Detay Ekle</a>
                                         }
                                     </td>
-                                    <td>
-                                        @if (model3Dict.ContainsKey(item.PropertyID))
-                                        {
+                                    @if (model3Dict.ContainsKey(item.PropertyID))
+                                    {
+                                        <td>
                                             <a href="/Admin/Property/PropertyImage/@item.PropertyID" class="btn btn-outline-primary">Resimler</a>
-                                        }
-                                        else
-                                        {
+                                            <br />
                                             <a href="/Admin/Property/CreatePropertyImage/@item.PropertyID" class="btn btn-outline-info">Resim Ekle</a>
-                                        }
-                                    </td>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <a href="/Admin/Property/CreatePropertyImage/@item.PropertyID" class="btn btn-outline-info">Resim Ekle</a>
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>

@@ -1,0 +1,21 @@
+﻿@model UpdatePropertyImageDto
+@{
+    ViewData["Title"] = "UpdatePropertyImage";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">İlan Resim güncelleme sayfası</h6>
+                <form asp-action="UpdatePropertyImage" method="post">
+                    <input type="hidden" asp-for="PropertyImageId" />
+                    <label>Resim Url</label>
+                    <input type="text" asp-for="ImageUrl" class="form-control" />
+                    <br />
+                    <button class="btn btn-primary">Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
