@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using System.Text;
 using RealEstate_Dapper_UI.Services;
 using DataTransferObjectLayer.Dtos.PropertyImageDtos;
+using DataTransferObjectLayer.Dtos.PropertyAmenityDtos;
 
 namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
 {
@@ -37,24 +38,30 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
                 var responseMessage = await client.GetAsync("Property/PropertyListWithCategory");
                 var responseMessage2 = await client.GetAsync("PropertyDetail");
                 var responseMessage3 = await client.GetAsync("PropertyImage");
+                var responseMessage4 = await client.GetAsync("PropertyAmenity/GetPropertyAmenityByPropertyId/");
 
-                if (responseMessage.IsSuccessStatusCode && responseMessage2.IsSuccessStatusCode && responseMessage3.IsSuccessStatusCode)
+                if (responseMessage.IsSuccessStatusCode && responseMessage2.IsSuccessStatusCode && responseMessage3.IsSuccessStatusCode && responseMessage4.IsSuccessStatusCode)
                 {
                     var jsonData = await responseMessage.Content.ReadAsStringAsync();
                     var values = JsonConvert.DeserializeObject<List<ResultPropertyDtos>>(jsonData);
-                    ViewBag.Model1 = values;
+                    ViewBag.Model1 = values ?? new List<ResultPropertyDtos>(); // Null check
 
                     var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
                     var values2 = JsonConvert.DeserializeObject<List<ResultPropertyDetailDto>>(jsonData2);
-                    ViewBag.Model2 = values2;
+                    ViewBag.Model2 = values2 ?? new List<ResultPropertyDetailDto>(); // Null check
 
                     var jsonData3 = await responseMessage3.Content.ReadAsStringAsync();
                     var values3 = JsonConvert.DeserializeObject<List<GetPropertyImageByPropertyIdDto>>(jsonData3);
-                    ViewBag.Model3 = values3;
+                    ViewBag.Model3 = values3 ?? new List<GetPropertyImageByPropertyIdDto>(); // Null check
+
+                    var jsonData4 = await responseMessage4.Content.ReadAsStringAsync();
+                    var values4 = JsonConvert.DeserializeObject<List<GetPropertyAmenityByPropertyId>>(jsonData4);
+                    ViewBag.Model4 = values4 ?? new List<GetPropertyAmenityByPropertyId>(); // Null check
 
                     // Aynı anahtarı göz ardı etmek için GroupBy kullanıyoruz
-                    ViewBag.Model2Dict = values2.GroupBy(v => v.PropertyID).ToDictionary(g => g.Key, g => g.First());
-                    ViewBag.Model3Dict = values3.GroupBy(z => z.PropertyID).ToDictionary(g => g.Key, g => g.First());
+                    ViewBag.Model2Dict = values2?.GroupBy(v => v.PropertyID).ToDictionary(g => g.Key, g => g.First()) ?? new Dictionary<int, ResultPropertyDetailDto>();
+                    ViewBag.Model3Dict = values3?.GroupBy(z => z.PropertyID).ToDictionary(g => g.Key, g => g.First()) ?? new Dictionary<int, GetPropertyImageByPropertyIdDto>();
+                    ViewBag.Model4Dict = values4?.GroupBy(t => t.PropertyID).ToDictionary(g => g.Key, g => g.First()) ?? new Dictionary<int, GetPropertyAmenityByPropertyId>();
 
                     return View();
                 }
@@ -68,6 +75,7 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
                 return View();
             }
         }
+
         [HttpGet]
         public async Task<IActionResult> CreateProperty()
         {
@@ -390,7 +398,6 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
             }
             return View();
         }
-
         [HttpGet]
         public async Task<IActionResult> UpdatePropertyImage(int id)
         {
@@ -416,6 +423,21 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "Property", new { area = "Admin" });
+            }
+            return View();
+        }
+
+        //PropertyAmenity Controler//
+        public async Task<IActionResult> PropertyAmenity(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_apiSettings.BaseUrl);
+            var responseMessage = await client.GetAsync("PropertyAmenity/GetPropertyAmenityByPropertyId?id=" + id);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<GetPropertyAmenityByPropertyId>>(jsonData);
+                return View(values);
             }
             return View();
         }

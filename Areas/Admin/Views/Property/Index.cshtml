@@ -4,6 +4,7 @@
     int count = 0;
     var model2Dict = ViewBag.Model2Dict as Dictionary<int, ResultPropertyDetailDto>;
     var model3Dict = ViewBag.Model3Dict as Dictionary<int, GetPropertyImageByPropertyIdDto>;
+    var model4Dict = ViewBag.Model4Dict as Dictionary<int, GetPropertyAmenityByPropertyId>;
     var errorMessage = ViewBag.ErrorMessage as string;
 }
 
@@ -37,6 +38,7 @@
                                 <th scope="col">Günün Fırsatı</th>
                                 <th scope="col">Detaylar</th>
                                 <th scope="col">Resimler</th>
+                                <th scope="col">Özellikler</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -105,6 +107,18 @@
                                     {
                                         <td>
                                             <a href="/Admin/Property/CreatePropertyImage/@item.PropertyID" class="btn btn-outline-info">Resim Ekle</a>
+                                        </td>
+                                    }
+                                    @if (model4Dict.ContainsKey(item.PropertyID))
+                                    {
+                                        <td>
+                                            <a href="/Admin/Property/PropertyAmenity/@item.PropertyID" class="btn btn-outline-primary">Özellikler</a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <a href="/Admin/Property/PropertyAmenity/@item.PropertyID" class="btn btn-outline-primary">Özellikler</a>
                                         </td>
                                     }
                                 </tr>

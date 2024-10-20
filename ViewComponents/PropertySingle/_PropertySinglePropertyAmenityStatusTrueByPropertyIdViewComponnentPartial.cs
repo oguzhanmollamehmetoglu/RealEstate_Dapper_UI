@@ -17,7 +17,7 @@ namespace RealEstate_Dapper_UI.ViewComponents.PropertySingle
             _apiSettings = apiSettings.Value;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int id)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_apiSettings.BaseUrl);
