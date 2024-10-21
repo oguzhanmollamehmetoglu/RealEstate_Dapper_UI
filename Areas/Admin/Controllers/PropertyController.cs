@@ -55,13 +55,13 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
                     ViewBag.Model3 = values3 ?? new List<GetPropertyImageByPropertyIdDto>(); // Null check
 
                     var jsonData4 = await responseMessage4.Content.ReadAsStringAsync();
-                    var values4 = JsonConvert.DeserializeObject<List<GetPropertyAmenityByPropertyId>>(jsonData4);
-                    ViewBag.Model4 = values4 ?? new List<GetPropertyAmenityByPropertyId>(); // Null check
+                    var values4 = JsonConvert.DeserializeObject<List<GetPropertyAmenityByPropertyIdDto>>(jsonData4);
+                    ViewBag.Model4 = values4 ?? new List<GetPropertyAmenityByPropertyIdDto>(); // Null check
 
                     // Aynı anahtarı göz ardı etmek için GroupBy kullanıyoruz
                     ViewBag.Model2Dict = values2?.GroupBy(v => v.PropertyID).ToDictionary(g => g.Key, g => g.First()) ?? new Dictionary<int, ResultPropertyDetailDto>();
                     ViewBag.Model3Dict = values3?.GroupBy(z => z.PropertyID).ToDictionary(g => g.Key, g => g.First()) ?? new Dictionary<int, GetPropertyImageByPropertyIdDto>();
-                    ViewBag.Model4Dict = values4?.GroupBy(t => t.PropertyID).ToDictionary(g => g.Key, g => g.First()) ?? new Dictionary<int, GetPropertyAmenityByPropertyId>();
+                    ViewBag.Model4Dict = values4?.GroupBy(t => t.PropertyID).ToDictionary(g => g.Key, g => g.First()) ?? new Dictionary<int, GetPropertyAmenityByPropertyIdDto>();
 
                     return View();
                 }
@@ -436,7 +436,7 @@ namespace RealEstate_Dapper_UI.Areas.Admin.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<GetPropertyAmenityByPropertyId>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<GetPropertyAmenityByPropertyIdDto>>(jsonData);
                 return View(values);
             }
             return View();

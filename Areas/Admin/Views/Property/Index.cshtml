@@ -4,7 +4,7 @@
     int count = 0;
     var model2Dict = ViewBag.Model2Dict as Dictionary<int, ResultPropertyDetailDto>;
     var model3Dict = ViewBag.Model3Dict as Dictionary<int, GetPropertyImageByPropertyIdDto>;
-    var model4Dict = ViewBag.Model4Dict as Dictionary<int, GetPropertyAmenityByPropertyId>;
+    var model4Dict = ViewBag.Model4Dict as Dictionary<int, GetPropertyAmenityByPropertyIdDto>;
     var errorMessage = ViewBag.ErrorMessage as string;
 }
 
@@ -126,6 +126,7 @@
                         </tbody>
                     </table>
                     <a href="/Admin/Property/CreateProperty/" class="btn btn-outline-info">Yeni İlan Girişi</a>
+                    <a href="/Admin/Amenity/Index/" class="btn btn-outline-success">İlan Özellikleri Listesi</a>
                 </div>
             </div>
         </div>

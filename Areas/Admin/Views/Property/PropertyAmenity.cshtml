@@ -1,4 +1,4 @@
-﻿@model List<GetPropertyAmenityByPropertyId>
+﻿@model List<GetPropertyAmenityByPropertyIdDto>
 @{
     ViewData["Title"] = "PropertyAmenity";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
@@ -22,7 +22,7 @@
                             </a>
                             <div class="w-100 ms-3">
                                 <div class="d-flex w-100 align-items-center justify-content-between">
-                                    <span>@item.Title...</span>
+                                    <span>@item.Title</span>
                                     @*                             <a href="/Admin/ToDoList/DeleteToDoList/@item.ToDoListID" class="btn btn-sm"><i class="fa fa-times"></i></a>
                             *@
                                 </div>
@@ -37,7 +37,7 @@
                             </a>
                             <div class="w-100 ms-3">
                                 <div class="d-flex w-100 align-items-center justify-content-between">
-                                    <span><del>@item.Title....</del></span>
+                                    <span><b>@item.Title</b></span>
                                     @*                             <a href="/Admin/ToDoList/DeleteToDoList/@item.ToDoListID" class="btn btn-sm text-primary"><i class="fa fa-times"></i></a>
                             *@
                                 </div>
